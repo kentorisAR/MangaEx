@@ -15,17 +15,18 @@
     }
 
     header {
-      background-color: #141414;
-      padding: 60px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px #00f0ff;
-    }
+  background-color: #141414;
+  padding: 0px 20px; /* убрали вертикальный отступ */
+  display: flex;
+  align-items: flex-end; /* чтобы логотип прижимался вниз */
+  justify-content: center;
+  box-shadow: 0 8px 10px -4px #00f0ff; /* тонкая неоновая полоса под логотипом */
+  height: 300px; /* по высоте логотипа */
+}
 
-    header img {
-      max-height: 300px; /* Увеличен логотип без изменения высоты шапки */
-    }
+header img {
+  max-height: 100%; /* логотип растягивается на высоту шапки */
+}
 
     h1 {
       text-align: center;
