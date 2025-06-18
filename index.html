@@ -1,22 +1,133 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Каталог Манги</title>
- <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Rubik', sans-serif;
+      background: linear-gradient(120deg, #0f0f0f, #1e1e2f);
+      color: #fff;
+    }
+
+    header {
+      background-color: #141414;
+      padding: 60px 20px; /* уменьшено на 3 см */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px #00f0ff;
+    }
+
+    header img {
+      max-height: 90px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 0 0 8px #ff00ff;
+    }
+
+    .manga-list {
+      max-width: 1300px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 25px;
+      padding: 0 20px;
+    }
+
+    .manga-card {
+      background-color: #1e1e2f;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .manga-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+    }
+
+    .manga-card img {
+      width: 100%;
+      height: 160px; /* Примерно 6 см */
+      object-fit: cover;
+    }
+
+    .manga-card .info {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .manga-card .info h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #00f0ff;
+    }
+
+    .manga-card .info p {
+      font-size: 0.8rem;
+      color: #ccc;
+      flex-grow: 1;
+    }
+
+    .manga-card a {
+      margin-top: 10px;
+      text-decoration: none;
+      color: #fff;
+      background: #00f0ff;
+      text-align: center;
+      padding: 6px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .manga-card a:hover {
+      background: #ff00ff;
+      color: #000;
+    }
+  </style>
 </head>
 <body>
-  <!-- ✅ Сюди вставляємо логотип -->
   <header>
-    <img src="logo.MangaEx-removebg-preview.png" alt="MangaEx" width="480";/>
-    <h1>MangaEx</h1>
+    <img src="logo.MangaEx-removebg-preview.png" alt="MangaEx" />
   </header>
-  <h1>Каталог Манги</h1>
+  <h1>Каталог манги</h1>
   <div class="manga-list">
-    <a href="manga1.html">📖 Наруто</a>
-    <a href="manga2.html">📖 Атака Титанів</a>
-    <!-- Додай більше -->
+    <div class="manga-card">
+      <img src="naruto.jpg" alt="Наруто">
+      <div class="info">
+        <h3>Наруто</h3>
+        <p>История ниндзя, мечтающего стать Хокаге.</p>
+        <a href="manga1.html">Читать</a>
+      </div>
+    </div>
+
+    <div class="manga-card">
+      <img src="aot.jpg" alt="Атака Титанов">
+      <div class="info">
+        <h3>Атака Титанов</h3>
+        <p>Человечество против титанов в мире без надежды.</p>
+        <a href="manga2.html">Читать</a>
+      </div>
+    </div>
+
+    <!-- Добавь больше карточек -->
   </div>
 </body>
 </html>
