@@ -15,18 +15,53 @@
     }
 
     header {
-  background-color: #141414;
-  padding: 0px 30px; /* убрали вертикальный отступ */
-  display: flex;
-  align-items: flex-end; /* чтобы логотип прижимался вниз */
-  justify-content: center;
-  box-shadow: 0 8px 10px -4px #00f0ff; /* тонкая неоновая полоса под логотипом */
-  height: 300px; /* по высоте логотипа */
-}
+      background-color: #141414;
+      padding: 0px 30px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      box-shadow: 0 8px 10px -4px #00f0ff;
+      height: 300px;
+      position: relative;
+    }
 
-header img {
-  max-height: 100%; /* логотип растягивается на высоту шапки */
-}
+    header img {
+      max-height: 100%;
+    }
+
+    nav {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 240, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 0;
+      backdrop-filter: blur(8px);
+      animation: fadeIn 1s ease forwards;
+    }
+
+    nav a {
+      color: #00f0ff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    nav a:hover {
+      background: #00f0ff;
+      color: #000;
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     h1 {
       text-align: center;
@@ -62,7 +97,7 @@ header img {
 
     .manga-card img {
       width: 100%;
-      height: 160px; /* Примерно 6 см */
+      height: 160px;
       object-fit: cover;
     }
 
@@ -107,7 +142,15 @@ header img {
 <body>
   <header>
     <img src="logo.MangaEx-removebg-preview.png" alt="MangaEx" />
+    <nav>
+      <a href="#">Главная</a>
+      <a href="#">Жанры</a>
+      <a href="#">Тайтлы</a>
+      <a href="#">Новое</a>
+      <a href="#">О нас</a>
+    </nav>
   </header>
+
   <h1>Каталог манги</h1>
   <div class="manga-list">
     <div class="manga-card">
@@ -128,12 +171,15 @@ header img {
       </div>
     </div>
 
-    <!-- Добавь больше карточек -->
-  <div class="manga-card">
+    <div class="manga-card">
       <img src="Soineya_no_Uta.jpg" alt="Soineya_no_Uta">
       <div class="info">
         <h3>Soineya no Uta | Call of the Snooze Shop</h3>
         <p></p>
-        <a href="manga2.html">Читать</a>
+        <a href="manga3.html">Читать</a>
       </div>
     </div>
+  </div>
+</body>
+</html>
+
