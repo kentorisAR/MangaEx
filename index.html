@@ -2,9 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Каталог Манги</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+  <title>MangaEx</title>
   <style>
     body {
       margin: 0;
@@ -21,8 +19,7 @@
       align-items: flex-end;
       justify-content: center;
       box-shadow: 0 8px 10px -4px #00f0ff;
-      height: 300px;
-      position: relative;
+      height: 250px;
     }
 
     header img {
@@ -30,37 +27,115 @@
     }
 
     nav {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background: rgba(0, 240, 255, 0.1);
       display: flex;
       justify-content: center;
-      gap: 30px;
-      padding: 15px 0;
-      backdrop-filter: blur(8px);
-      animation: fadeIn 1s ease forwards;
+      gap: 80px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      padding: 12px 0;
+      position: relative;
+      z-index: 10;
     }
 
-    nav a {
+    nav a, .dropdown-label {
+      position: relative;
       color: #00f0ff;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 1rem;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: background 0.3s, transform 0.3s;
+      font-size: 1.2rem;
+      padding: 12px 20px;
+      transition: color 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    nav a:hover {
+    nav a::after, .dropdown-label::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #ff00ff, #00f0ff, #ff00ff);
+      background-size: 300% 100%;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after, .dropdown-label:hover::after {
+      width: 100%;
+      animation: neon 2s linear infinite;
+    }
+
+    @keyframes neon {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+
+    .dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .dropdown-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 20px;
+      height: 16px;
+    }
+
+    .dropdown-icon div {
+      width: 100%;
+      height: 3px;
       background: #00f0ff;
-      color: #000;
-      transform: scale(1.1);
+      border-radius: 2px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(30, 30, 47, 0.95);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      flex-wrap: wrap;
+      width: 100vw;
+      max-width: none;
+      height: auto;
+      white-space: normal;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+
+    .dropdown:hover .dropdown-content {
+      max-height: 1000px;
+      opacity: 1;
+    }
+
+    .dropdown-content .genre-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dropdown-content a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+
+    .dropdown-content a:hover {
+      color: #ff00ff;
     }
 
     h1 {
@@ -141,45 +216,90 @@
 </head>
 <body>
   <header>
-    <img src="logo.MangaEx-removebg-preview.png" alt="MangaEx" />
-    <nav>
-      <a href="#">Главная</a>
-      <a href="#">Жанры</a>
-      <a href="#">Тайтлы</a>
-      <a href="#">Новое</a>
-      <a href="#">О нас</a>
-    </nav>
+    <img src="https://via.placeholder.com/300x100?text=MangaEx+Logo" alt="MangaEx" />
   </header>
+
+  <nav>
+    <a href="#">Главная</a>
+    <div class="dropdown">
+      <div class="dropdown-label">
+        <span>Жанры</span>
+        <div class="dropdown-icon">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="dropdown-content">
+        <div class="genre-column">
+          <a href="#">Экшен</a>
+          <a href="#">Фэнтези</a>
+          <a href="#">Романтика</a>
+          <a href="#">Комедия</a>
+          <a href="#">Ужасы</a>
+          <a href="#">Сёнэн</a>
+          <a href="#">Исекай</a>
+          <a href="#">Меха</a>
+          <a href="#">Этти</a>
+          <a href="#">Повседневность</a>
+        </div>
+        <div class="genre-column">
+          <a href="#">Детектив</a>
+          <a href="#">Драма</a>
+          <a href="#">Спорт</a>
+          <a href="#">Историческое</a>
+          <a href="#">Психология</a>
+          <a href="#">Триллер</a>
+          <a href="#">Фантастика</a>
+          <a href="#">Боевые искусства</a>
+          <a href="#">Мистика</a>
+          <a href="#">Школа</a>
+        </div>
+        <div class="genre-column">
+          <a href="#">Сёдзё</a>
+          <a href="#">Сэйнэн</a>
+          <a href="#">Юри</a>
+          <a href="#">Яой</a>
+          <a href="#">Хентай</a>
+          <a href="#">Магия</a>
+          <a href="#">Игры</a>
+          <a href="#">Приключения</a>
+          <a href="#">Музыка</a>
+          <a href="#">Киберпанк</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">Тайтлы</a>
+    <a href="#">Новое</a>
+    <a href="#">О нас</a>
+  </nav>
 
   <h1>Каталог манги</h1>
   <div class="manga-list">
     <div class="manga-card">
-      <img src="naruto.jpg" alt="Наруто">
+      <img src="https://via.placeholder.com/200x300?text=Naruto" alt="Наруто">
       <div class="info">
         <h3>Наруто</h3>
         <p>История ниндзя, мечтающего стать Хокаге.</p>
-        <a href="manga1.html">Читать</a>
+        <a href="#">Читать</a>
       </div>
     </div>
-
     <div class="manga-card">
-      <img src="attack_on_titan.jpg" alt="Атака Титанов">
+      <img src="https://via.placeholder.com/200x300?text=AoT" alt="Атака Титанов">
       <div class="info">
         <h3>Атака Титанов</h3>
         <p>Человечество против титанов в мире без надежды.</p>
-        <a href="manga2.html">Читать</a>
+        <a href="#">Читать</a>
       </div>
     </div>
-
     <div class="manga-card">
-      <img src="Soineya_no_Uta.jpg" alt="Soineya_no_Uta">
+      <img src="https://via.placeholder.com/200x300?text=Soineya+no+Uta" alt="Soineya no Uta">
       <div class="info">
-        <h3>Soineya no Uta | Call of the Snooze Shop</h3>
-        <p></p>
-        <a href="manga3.html">Читать</a>
+        <h3>Soineya no Uta</h3>
+        <p>Тихая история в магазине объятий.</p>
+        <a href="#">Читать</a>
       </div>
     </div>
   </div>
 </body>
 </html>
-
