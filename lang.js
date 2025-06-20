@@ -1,40 +1,67 @@
-// lang.js — Google Translate с сохранением выбора языка пользователя
-
-// Функция смены языка через Google Translate
-function changeLanguage(lang) {
-  // Ищем выпадающий список Google Translate
-  var select = document.querySelector('.goog-te-combo');
-  if (select) {
-    select.value = lang;
-    select.dispatchEvent(new Event('change'));
-    localStorage.setItem('site_lang', lang); // Сохраняем выбранный язык
+const translations = {
+  ru: {
+    "catalog": "Каталог манги",
+    "login": "Вход / Регистрация",
+    "main": "Главная",
+    "genres": "Жанры",
+    "titles": "Тайтлы",
+    "new": "Новое",
+    "about": "О нас",
+    // Пример жанров (можешь добавить остальные)
+    "action": "Экшен",
+    "fantasy": "Фэнтези",
+    "romance": "Романтика",
+    "comedy": "Комедия"
+    // ... Добавь остальные жанры и тексты при необходимости
+  },
+  uk: {
+    "catalog": "Каталог манґи",
+    "login": "Вхід / Реєстрація",
+    "main": "Головна",
+    "genres": "Жанри",
+    "titles": "Тайтли",
+    "new": "Нове",
+    "about": "Про нас",
+    "action": "Екшн",
+    "fantasy": "Фентезі",
+    "romance": "Романтика",
+    "comedy": "Комедія"
+    // ... Добавь остальные жанры и тексты при необходимости
+  },
+  en: {
+    "catalog": "Manga Catalog",
+    "login": "Login / Register",
+    "main": "Home",
+    "genres": "Genres",
+    "titles": "Titles",
+    "new": "New",
+    "about": "About Us",
+    "action": "Action",
+    "fantasy": "Fantasy",
+    "romance": "Romance",
+    "comedy": "Comedy"
+    // ... Add more genres and texts as needed
   }
+};
+
+function setLanguage(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+  localStorage.setItem('manga_lang', lang);
 }
 
-// Ждем загрузки DOM
-document.addEventListener('DOMContentLoaded', function() {
-  // Добавляем скрытый div для Google Translate, если его нет
-  var el = document.getElementById('google_translate_element');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'google_translate_element';
-    el.style.display = 'none';
-    document.body.appendChild(el);
-  }
-
-  // Вешаем обработчики на языковые ссылки
-  var langLinks = document.querySelectorAll('.lang-list a[data-lang]');
-  langLinks.forEach(function(link) {
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.lang-list a[data-lang]').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
-      var lang = this.getAttribute('data-lang');
-      changeLanguage(lang);
+      setLanguage(this.getAttribute('data-lang'));
     });
   });
-
-  // Автоустановка сохранённого языка после загрузки
-  setTimeout(function() {
-    var savedLang = localStorage.getItem('site_lang');
-    if (savedLang) changeLanguage(savedLang);
-  }, 1500); // Ждем подгрузки Google Translate
+  // Автоматически применяем язык при загрузке страницы
+  const saved = localStorage.getItem('manga_lang') || 'ru';
+  setLanguage(saved);
 });
