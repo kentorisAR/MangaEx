@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
   switchToRegister.addEventListener('click', function(e){e.preventDefault(); showRegister();});
   switchToLogin.addEventListener('click', function(e){e.preventDefault(); showLogin();});
 
-  // Простая локальная регистрация (LocalStorage)
+  // Регистрация (LocalStorage)
   registerForm.addEventListener('submit', function(e){
     e.preventDefault();
     const username = document.getElementById('registerUsername').value.trim();
@@ -80,27 +80,45 @@ document.addEventListener('DOMContentLoaded', function () {
     showLogin();
   });
 
-  // Простая локальная авторизация (LocalStorage)
+  // Вход по логину или email
   loginForm.addEventListener('submit', function(e){
     e.preventDefault();
-    const username = document.getElementById('loginUsername').value.trim();
+    const loginOrEmail = document.getElementById('loginUsername').value.trim();
     const password = document.getElementById('loginPassword').value;
-    const user = localStorage.getItem('user_' + username);
-    if(!user){
+
+    // Поиск по логину
+    let user = localStorage.getItem('user_' + loginOrEmail);
+    let userObj = null;
+
+    // Если по логину не найден, ищем по email
+    if (!user) {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('user_')) {
+          const u = JSON.parse(localStorage.getItem(key));
+          if (u.email && u.email.toLowerCase() === loginOrEmail.toLowerCase()) {
+            user = localStorage.getItem(key);
+            break;
+          }
+        }
+      }
+    }
+
+    if (!user) {
       alert('Пользователь не найден!');
       return;
     }
-    const userObj = JSON.parse(user);
+
+    userObj = JSON.parse(user);
     if(userObj.password !== password){
       alert('Неверный пароль!');
       return;
     }
     alert('Вход выполнен! Добро пожаловать, ' + userObj.username);
     modal.classList.remove('active');
-    localStorage.setItem('current_user', username);
+    localStorage.setItem('current_user', userObj.username);
     if (profileLink) profileLink.style.display = '';
     if (loginButton) loginButton.style.display = 'none';
-    // Можно добавить автоматический переход в профиль:
-    // window.location.href = "profile.html";
+    // Можно добавить переход: window.location.href = "profile.html";
   });
 });
