@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login & Register - Manga Reader</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 2em auto; }
+    label, input, button { display: block; width: 100%; margin: 0.5em 0; }
+    #message { margin-top: 1em; }
+  </style>
+</head>
+<body>
+
+  <h2>Вхід / Реєстрація</h2>
+
+  <form id="authForm">
+    <label for="username">Логін:</label>
+    <input type="text" id="username" name="username" required />
+
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required />
+
+    <button type="submit" id="loginBtn">Увійти</button>
+    <button type="button" id="registerBtn">Зареєструватися</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script src="login.js"></script>
+
+</body>
+</html>

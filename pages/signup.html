@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Реєстрація - MangaEx</title>
+  <link rel="stylesheet" href="style.css" /> <!-- Якщо у тебе є спільні стилі -->
+  <style>
+    body {
+      background-color: #1b1b2f;
+      color: #e0e0ff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #2c2c57;
+      padding: 2.5rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #5454c3aa;
+      width: 340px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.8rem;
+      color: #7b8cff;
+      font-weight: 600;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #9aaaff;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #41417a;
+      color: #dde1ff;
+      outline: none;
+      transition: 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      background-color: #53539d;
+      box-shadow: 0 0 8px #7b8cff;
+    }
+    button {
+      width: 100%;
+      padding: 0.65rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background-color: #7b8cff;
+      border: none;
+      border-radius: 7px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #606fcc;
+    }
+    .footer-text {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #9a9fff;
+    }
+    .footer-text a {
+      color: #7b8cff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Реєстрація</h2>
+    <form id="signupForm" action="#" method="POST" novalidate>
+      <label for="username">Ім'я користувача</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Введіть ім'я користувача"
+        minlength="3"
+        maxlength="20"
+        required
+      />
+
+      <label for="email">Електронна пошта</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="example@mail.com"
+        required
+      />
+
+      <label for="password">Пароль</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Введіть пароль"
+        minlength="6"
+        required
+      />
+
+      <label for="confirmPassword">Підтвердити пароль</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Повторіть пароль"
+        minlength="6"
+        required
+      />
+
+      <button type="submit">Зареєструватися</button>
+    </form>
+    <p class="footer-text">
+      Вже маєте акаунт? <a href="login.html">Увійти</a>
+    </p>
+  </div>
+
+  <script>
+    const form = document.getElementById('signupForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = form.username.value.trim();
+      const email = form.email.value.trim();
+      const password = form.password.value;
+      const confirmPassword = form.confirmPassword.value;
+
+      if (password !== confirmPassword) {
+        alert('Паролі не співпадають!');
+        form.confirmPassword.focus();
+        return;
+      }
+
+      if (username.length < 3 || username.length > 20) {
+        alert('Ім\'я користувача має бути від 3 до 20 символів.');
+        form.username.focus();
+        return;
+      }
+
+      // Тут можна додати логіку відправки на сервер або інтеграцію з існуючим login.js
+      alert('Реєстрація успішна! (поки що це заглушка)');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
