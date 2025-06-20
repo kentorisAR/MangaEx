@@ -293,7 +293,7 @@
       margin-top: 35px;
       box-shadow: 0 -2px 8px #00f0ff33;
     }
-    /* Модальное окно логина */
+    /* Модальное окно логина и регистрации */
     .login-modal {
       position: fixed;
       top: 50%;
@@ -340,7 +340,7 @@
       outline: none;
       box-sizing: border-box;
     }
-    .login-modal button[type="submit"] {
+    .login-modal button[type="submit"], .login-modal .tab-btn {
       width: 95%;
       margin: 15px 0 4px 0;
       padding: 10px 0;
@@ -353,7 +353,7 @@
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
     }
-    .login-modal button[type="submit"]:hover {
+    .login-modal button[type="submit"]:hover, .login-modal .tab-btn.active {
       background: #ff00ff;
       color: #fff;
     }
@@ -363,6 +363,28 @@
       font-size: 1em;
       margin-top: 8px;
       display: block;
+      cursor: pointer;
+    }
+    .login-modal .tabs-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .login-modal .tab-btn {
+      padding: 8px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #181825;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      width: auto;
+      margin: 0;
+    }
+    .login-modal .tab-btn.active {
+      background: #00f0ff;
+      color: #181825;
     }
     @media (max-width: 700px) {
       nav { gap: 10px; }
@@ -387,7 +409,7 @@
 </head>
 <body>
   <header>
-    <img src="logo.MangaEx-removebg-preview.png" alt="MangaEx Logo" class="logo" />
+    <img src="images/logo.MangaEx-removebg-preview.png" alt="MangaEx Logo" class="logo" />
     <div class="topbar-actions">
       <div class="dropdown lang-dropdown">
         <div class="dropdown-label" tabindex="0">
@@ -438,7 +460,7 @@
   <h1 data-i18n="catalog">Каталог манги</h1>
   <div class="manga-list">
     <div class="manga-card">
-      <img src="naruto.jpg" alt="Наруто" class="cover">
+      <img src="images/naruto.jpg" alt="Наруто" class="cover">
       <div class="info">
         <h3>Наруто</h3>
         <p>История ниндзя, мечтающего стать Хокаге.</p>
@@ -446,7 +468,7 @@
       </div>
     </div>
     <div class="manga-card">
-      <img src="attack_on_titan.jpg" alt="Атака Титанов" class="cover">
+      <img src="images/attack_on_titan.jpg" alt="Атака Титанов" class="cover">
       <div class="info">
         <h3>Атака Титанов</h3>
         <p>Человечество против титанов в мире без надежды.</p>
@@ -454,7 +476,7 @@
       </div>
     </div>
     <div class="manga-card">
-      <img src="Soineya_no_Uta.jpg" alt="Soineya no Uta" class="cover">
+      <img src="images/Soineya_no_Uta.jpg" alt="Soineya no Uta" class="cover">
       <div class="info">
         <h3>Soineya no Uta</h3>
         <p>Тихая история в магазине объятий.</p>
@@ -467,13 +489,26 @@
   <div class="login-modal" id="loginModal">
     <div class="modal-content">
       <span class="close" id="closeLoginModal">&times;</span>
-      <h2>Вход или регистрация</h2>
+      <div class="tabs-row">
+        <button id="showLoginTab" class="tab-btn active">Вход</button>
+        <button id="showRegisterTab" class="tab-btn">Регистрация</button>
+      </div>
+      <!-- Форма входа -->
       <form id="loginForm" autocomplete="off">
-        <input type="text" placeholder="Логин или email" required />
-        <input type="password" placeholder="Пароль" required />
+        <input type="text" id="loginUsername" placeholder="Логин или email" required />
+        <input type="password" id="loginPassword" placeholder="Пароль" required />
         <button type="submit">Войти</button>
       </form>
-      <a href="#" class="register-link">Нет аккаунта? Зарегистрируйтесь</a>
+      <!-- Форма регистрации (скрыта по умолчанию) -->
+      <form id="registerForm" style="display:none;" autocomplete="off">
+        <input type="text" id="registerUsername" placeholder="Логин" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Пароль" required />
+        <input type="password" id="registerPassword2" placeholder="Повторите пароль" required />
+        <button type="submit">Зарегистрироваться</button>
+      </form>
+      <a class="register-link" id="switchToRegister">Нет аккаунта? Зарегистрируйтесь</a>
+      <a class="register-link" id="switchToLogin" style="display:none;">Уже есть аккаунт? Войти</a>
     </div>
   </div>
 
