@@ -21,17 +21,19 @@
       align-items: flex-end;
       justify-content: center;
       box-shadow: 0 8px 10px -4px #00f0ff;
-      height: 180px;
+      height: 250px;
       position: relative;
     }
-    header img.logo {
-      max-height: 140px;
-      margin: 20px 0;
+    .logo {
+      max-height: 210px;
+      margin: 20px 0 0 0;
       display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .topbar-actions {
       position: absolute;
-      top: 18px;
+      top: 24px;
       right: 24px;
       display: flex;
       gap: 18px;
@@ -84,9 +86,11 @@
     .dropdown-icon {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 2.5px;
       width: 18px;
-      height: 14px;
+      height: 18px;
+      margin-left: 5px;
     }
     .dropdown-icon div {
       width: 100%;
@@ -149,16 +153,6 @@
       color: #ff00ff;
       background: #181825;
     }
-    .genre-icon {
-      width: 19px;
-      height: 19px;
-      vertical-align: middle;
-      object-fit: contain;
-      border-radius: 3px;
-      box-shadow: 0 1px 3px #0003;
-      background: #222;
-      margin-right: 2px;
-    }
     .lang-dropdown {
       position: relative;
       display: inline-block;
@@ -172,6 +166,9 @@
       border: 1px solid #23233a;
       font-size: 1rem;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .lang-dropdown .dropdown-label:hover {
       background: #23233a;
@@ -341,20 +338,22 @@
       <div class="dropdown-label" tabindex="0" data-i18n="genres">
         Жанры
         <div class="dropdown-icon">
-          <div></div><div></div><div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
       </div>
       <div class="dropdown-content">
-        <a href="#" data-i18n="action"><img src="images/genre_action.png" alt="Action" class="genre-icon">Экшен</a>
-        <a href="#" data-i18n="adventure"><img src="images/genre_adventure.png" alt="Adventure" class="genre-icon">Приключения</a>
-        <a href="#" data-i18n="comedy"><img src="images/genre_comedy.png" alt="Comedy" class="genre-icon">Комедия</a>
-        <a href="#" data-i18n="drama"><img src="images/genre_drama.png" alt="Drama" class="genre-icon">Драма</a>
-        <a href="#" data-i18n="fantasy"><img src="images/genre_fantasy.png" alt="Fantasy" class="genre-icon">Фэнтези</a>
-        <a href="#" data-i18n="romance"><img src="images/genre_romance.png" alt="Romance" class="genre-icon">Романтика</a>
-        <a href="#" data-i18n="sliceoflife"><img src="images/genre_sliceoflife.png" alt="Slice of Life" class="genre-icon">Повседневность</a>
-        <a href="#" data-i18n="supernatural"><img src="images/genre_supernatural.png" alt="Supernatural" class="genre-icon">Сверхъестественное</a>
-        <a href="#" data-i18n="mystery"><img src="images/genre_mystery.png" alt="Mystery" class="genre-icon">Мистика</a>
-        <a href="#" data-i18n="sports"><img src="images/genre_sports.png" alt="Sports" class="genre-icon">Спорт</a>
+        <a href="#" data-i18n="action">Экшен</a>
+        <a href="#" data-i18n="adventure">Приключения</a>
+        <a href="#" data-i18n="comedy">Комедия</a>
+        <a href="#" data-i18n="drama">Драма</a>
+        <a href="#" data-i18n="fantasy">Фэнтези</a>
+        <a href="#" data-i18n="romance">Романтика</a>
+        <a href="#" data-i18n="sliceoflife">Повседневность</a>
+        <a href="#" data-i18n="supernatural">Сверхъестественное</a>
+        <a href="#" data-i18n="mystery">Мистика</a>
+        <a href="#" data-i18n="sports">Спорт</a>
       </div>
     </div>
     <a href="#" data-i18n="titles">Тайтлы</a>
@@ -387,7 +386,6 @@
         <a href="#">Читать</a>
       </div>
     </div>
-    <!-- Добавь больше карточек по аналогии -->
   </div>
   <footer>
     © 2025 Ex_Ani_Project. Все права защищены.
