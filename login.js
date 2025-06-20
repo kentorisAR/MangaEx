@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Кнопка открытия модалки
   const authBtn = document.querySelector('.auth-btn');
-  // Модалка и элементы
   const modal = document.getElementById('loginModal');
   const closeBtn = document.getElementById('closeLoginModal');
 
@@ -23,10 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // Пример обработки логина (убрать, если логика другая)
+  // Заглушка логина
   document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    // Здесь добавить свою логику авторизации
     alert('Вход выполнен (заглушка)');
     modal.classList.remove('active');
   });
