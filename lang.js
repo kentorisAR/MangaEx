@@ -7,12 +7,11 @@ const translations = {
     "titles": "Тайтлы",
     "new": "Новое",
     "about": "О нас",
-    // Пример жанров (можешь добавить остальные)
     "action": "Экшен",
     "fantasy": "Фэнтези",
     "romance": "Романтика",
     "comedy": "Комедия"
-    // ... Добавь остальные жанры и тексты при необходимости
+    // ...добавь остальные жанры и тексты
   },
   uk: {
     "catalog": "Каталог манґи",
@@ -26,7 +25,7 @@ const translations = {
     "fantasy": "Фентезі",
     "romance": "Романтика",
     "comedy": "Комедія"
-    // ... Добавь остальные жанры и тексты при необходимости
+    // ...добавь остальные жанры и тексты
   },
   en: {
     "catalog": "Manga Catalog",
@@ -40,7 +39,7 @@ const translations = {
     "fantasy": "Fantasy",
     "romance": "Romance",
     "comedy": "Comedy"
-    // ... Add more genres and texts as needed
+    // ...add more genres and texts as needed
   }
 };
 
@@ -55,13 +54,14 @@ function setLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // click handlers for language menu
   document.querySelectorAll('.lang-list a[data-lang]').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       setLanguage(this.getAttribute('data-lang'));
     });
   });
-  // Автоматически применяем язык при загрузке страницы
+  // set language on page load
   const saved = localStorage.getItem('manga_lang') || 'ru';
   setLanguage(saved);
 });
