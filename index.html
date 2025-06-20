@@ -14,7 +14,6 @@
       color: #fff;
       overflow-x: hidden;
     }
-
     header {
       background-color: #141414;
       padding: 0px 30px;
@@ -25,11 +24,9 @@
       height: 250px;
       position: relative;
     }
-
     header img {
       max-height: 100%;
     }
-
     .topbar-actions {
       position: absolute;
       top: 24px;
@@ -38,7 +35,6 @@
       gap: 18px;
       z-index: 1001;
     }
-
     .auth-btn {
       background: #00f0ff;
       color: #23233a;
@@ -51,12 +47,10 @@
       box-shadow: 0 2px 8px #00f0ff22;
       transition: background 0.2s, color 0.2s;
     }
-
     .auth-btn:hover {
       background: #ff00ff;
       color: #fff;
     }
-
     nav {
       display: flex;
       justify-content: center;
@@ -67,7 +61,6 @@
       position: relative;
       z-index: 10;
     }
-
     nav a, .dropdown-label {
       position: relative;
       color: #00f0ff;
@@ -82,12 +75,10 @@
       border-radius: 6px;
       z-index: 2;
     }
-
     nav a:hover, .dropdown-label:hover {
       background: #181825;
       color: #ff00ff;
     }
-
     nav a::after, .dropdown-label::after {
       content: "";
       position: absolute;
@@ -99,17 +90,14 @@
       background-size: 300% 100%;
       transition: width 0.3s;
     }
-
     nav a:hover::after, .dropdown-label:hover::after {
       width: 90%;
       animation: neon 2s linear infinite;
     }
-
     @keyframes neon {
       0% { background-position: 0% 50%; }
       100% { background-position: 300% 50%; }
     }
-
     .dropdown-icon {
       display: flex;
       flex-direction: column;
@@ -117,17 +105,18 @@
       width: 18px;
       height: 14px;
     }
-
     .dropdown-icon div {
       width: 100%;
       height: 3px;
       background: #00f0ff;
       border-radius: 2px;
     }
-
     .genres-dropdown {
       position: relative;
       display: inline-block;
+    }
+    .genres-dropdown .dropdown-label {
+      user-select: none;
     }
     .genres-dropdown .dropdown-content {
       position: absolute;
@@ -152,13 +141,14 @@
       margin-top: 0;
     }
     .genres-dropdown:hover .dropdown-content,
-    .genres-dropdown:focus-within .dropdown-content {
+    .genres-dropdown:focus-within .dropdown-content,
+    .genres-dropdown .dropdown-label:focus + .dropdown-content,
+    .genres-dropdown .dropdown-label:active + .dropdown-content {
       display: grid;
       opacity: 1;
       pointer-events: auto;
       transform: translateX(-50%) translateY(0) scale(1);
     }
-
     .dropdown-content a {
       color: #fff;
       background: none;
@@ -172,12 +162,10 @@
       margin: 0;
       display: block;
     }
-
     .dropdown-content a:hover {
       color: #ff00ff;
       background: #181825;
     }
-
     .lang-dropdown {
       position: relative;
       display: inline-block;
@@ -240,7 +228,6 @@
       background: #181825;
       color: #00f0ff;
     }
-
     h1 {
       text-align: center;
       margin-top: 40px;
@@ -248,7 +235,6 @@
       color: #fff;
       text-shadow: 0 0 8px #ff00ff;
     }
-
     .manga-list {
       max-width: 1300px;
       margin: 40px auto;
@@ -257,7 +243,6 @@
       gap: 25px;
       padding: 0 20px;
     }
-
     .manga-card {
       background-color: #1e1e2f;
       border-radius: 10px;
@@ -267,37 +252,31 @@
       display: flex;
       flex-direction: column;
     }
-
     .manga-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff;
     }
-
     .manga-card img {
       width: 100%;
       height: 160px;
       object-fit: cover;
     }
-
     .manga-card .info {
       padding: 12px;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
     }
-
     .manga-card .info h3 {
       margin: 0 0 8px;
       font-size: 1rem;
       color: #00f0ff;
     }
-
     .manga-card .info p {
       font-size: 0.8rem;
       color: #ccc;
       flex-grow: 1;
     }
-
     .manga-card a {
       margin-top: 10px;
       text-decoration: none;
@@ -310,12 +289,10 @@
       transition: 0.3s;
       font-size: 0.85rem;
     }
-
     .manga-card a:hover {
       background: #ff00ff;
       color: #000;
     }
-
     footer {
       width: 100%;
       padding: 20px 0 15px 0;
@@ -327,7 +304,6 @@
       margin-top: 40px;
       box-shadow: 0 -2px 8px #00f0ff33;
     }
-
     @media (max-width: 700px) {
       nav { gap: 16px; }
       .dropdown-content, .lang-dropdown .dropdown-content.lang-list {
@@ -385,7 +361,7 @@
         <a href="#" data-i18n="fantasy">Фэнтези</a>
         <a href="#" data-i18n="romance">Романтика</a>
         <a href="#" data-i18n="comedy">Комедия</a>
-        <!-- Добавь остальные жанры, используя data-i18n, и добавь переводы в lang.js -->
+        <!-- Добавь остальные жанры, используя data-i18n -->
       </div>
     </div>
     <a href="#" data-i18n="titles">Тайтлы</a>
