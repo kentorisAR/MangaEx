@@ -1,9 +1,4 @@
-// Профиль хранится в localStorage по ключу "current_user"
-// Данные о пользователях: user_<login>
-// Примерная структура пользователя: { username, email, about, avatar, stats: {favorites,comments,history} }
-
 document.addEventListener('DOMContentLoaded', function () {
-  // Получение элементов
   const avatarPreview = document.getElementById('avatarPreview');
   const avatarInput = document.getElementById('avatarInput');
   const profileUsername = document.getElementById('profileUsername');
@@ -16,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const statComments = document.getElementById('stat-comments');
   const statHistory = document.getElementById('stat-history');
 
-  // Получить текущего пользователя
   let currentLogin = localStorage.getItem('current_user');
   if (!currentLogin) {
     alert('Вы не авторизованы! Сначала войдите.');
@@ -31,21 +25,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   userData = JSON.parse(userData);
 
-  // Заполнить поля профиля
   function fillProfile() {
     profileUsername.textContent = userData.username || currentLogin;
     profileLogin.value = userData.username || currentLogin;
     profileEmail.value = userData.email || "";
     profileAbout.value = userData.about || "";
-    avatarPreview.src = userData.avatar || "images/default-avatar.png";
-    // Статы
+    avatarPreview.src = userData.avatar || "images/empty_profile.jpg";
     statFavorites.textContent = userData.stats?.favorites || 0;
     statComments.textContent = userData.stats?.comments || 0;
     statHistory.textContent = userData.stats?.history || 0;
   }
   fillProfile();
 
-  // Смена аватара
   avatarInput.addEventListener('change', function () {
     const file = avatarInput.files[0];
     if (!file) return;
@@ -58,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
     reader.readAsDataURL(file);
   });
 
-  // Смена логина/email/about (и сохранить)
   saveProfileBtn.addEventListener('click', function () {
     const newUsername = profileLogin.value.trim();
     const newEmail = profileEmail.value.trim();
@@ -68,13 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
       alert("Логин не может быть пустым!");
       return;
     }
-    // Проверка на смену логина
     if (newUsername !== currentLogin) {
       if (localStorage.getItem('user_' + newUsername)) {
         alert("Такой логин уже существует!");
         return;
       }
-      // Сменить ключ
       localStorage.setItem('user_' + newUsername, JSON.stringify({
         ...userData,
         username: newUsername,
@@ -95,13 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
     fillProfile();
   });
 
-  // Выход из профиля
   logoutProfileBtn.addEventListener('click', function () {
     localStorage.removeItem('current_user');
     window.location.href = "index.html";
   });
 
-  // Сохраняет userData в localStorage
   function saveUser() {
     localStorage.setItem('user_' + currentLogin, JSON.stringify(userData));
   }
