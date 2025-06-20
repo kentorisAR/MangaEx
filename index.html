@@ -15,6 +15,7 @@
     }
   </script>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <link rel="stylesheet" href="dropdown.css">
   <style>
     body {
       margin: 0;
@@ -47,65 +48,6 @@
       display: flex;
       gap: 18px;
       z-index: 1001;
-    }
-
-    .topbar-actions .lang-dropdown {
-      min-width: 92px;
-    }
-
-    .topbar-actions .dropdown-label {
-      background: #181825;
-      border-radius: 6px;
-      padding: 8px 16px;
-      color: #00f0ff;
-      border: 1px solid #23233a;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .topbar-actions .dropdown-label:hover {
-      background: #23233a;
-      color: #ff00ff;
-    }
-
-    .topbar-actions .dropdown-content.lang-list {
-      left: auto;
-      right: 0;
-      min-width: 120px;
-      width: 150px;
-      grid-template-columns: 1fr;
-      padding: 10px 0;
-      background: #23233a;
-      box-shadow: 0 4px 24px #00f0ff33, 0 1.5px 0 #ff00ff33;
-      border-radius: 10px;
-      display: none;
-      position: absolute;
-      top: 110%;
-      z-index: 9999;
-    }
-
-    .topbar-actions .lang-dropdown:hover .dropdown-content.lang-list,
-    .topbar-actions .lang-dropdown:focus-within .dropdown-content.lang-list {
-      display: block;
-    }
-
-    .topbar-actions .dropdown-content.lang-list a {
-      padding: 8px 18px;
-      font-size: 1rem;
-      color: #fff;
-      border-radius: 0;
-      text-align: left;
-      border: none;
-      display: block;
-      text-decoration: none;
-      background: none;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .topbar-actions .dropdown-content.lang-list a:hover {
-      background: #181825;
-      color: #00f0ff;
     }
 
     .auth-btn {
@@ -179,12 +121,6 @@
       100% { background-position: 300% 50%; }
     }
 
-    .dropdown {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
     .dropdown-icon {
       display: flex;
       flex-direction: column;
@@ -203,7 +139,7 @@
     /* Панель жанров - компактная и красивая */
     .dropdown-content {
       position: absolute;
-      top: 110%;
+      top: 100%;
       left: 0;
       min-width: 220px;
       max-width: 350px;
@@ -211,7 +147,7 @@
       box-shadow: 0 4px 24px #00f0ff33, 0 1.5px 0 #ff00ff33;
       border-radius: 14px;
       padding: 18px 18px 12px 18px;
-      display: grid;
+      display: none;
       grid-template-columns: 1fr 1fr;
       gap: 12px 18px;
       opacity: 0;
@@ -221,11 +157,12 @@
       z-index: 99;
       max-height: 320px;
       overflow-y: auto;
+      margin-top: 0;
     }
 
-    /* Показываем только при наведении на сам пункт Жанры */
     .dropdown:hover .dropdown-content,
     .dropdown:focus-within .dropdown-content {
+      display: grid;
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0) scale(1);
@@ -248,6 +185,72 @@
     .dropdown-content a:hover {
       color: #ff00ff;
       background: #181825;
+    }
+
+    /* Языковое меню */
+    .lang-dropdown {
+      position: relative;
+      display: inline-block;
+      min-width: 92px;
+    }
+
+    .lang-dropdown .dropdown-label {
+      background: #181825;
+      border-radius: 6px;
+      padding: 8px 16px;
+      color: #00f0ff;
+      border: 1px solid #23233a;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .lang-dropdown .dropdown-label:hover {
+      background: #23233a;
+      color: #ff00ff;
+    }
+
+    .lang-dropdown .dropdown-content.lang-list {
+      left: 0;
+      right: auto;
+      min-width: 120px;
+      width: 150px;
+      grid-template-columns: 1fr;
+      padding: 10px 0;
+      background: #23233a;
+      box-shadow: 0 4px 24px #00f0ff33, 0 1.5px 0 #ff00ff33;
+      border-radius: 10px;
+      display: none;
+      position: absolute;
+      top: 100%;
+      z-index: 9999;
+      margin-top: 0;
+    }
+
+    .lang-dropdown:hover .dropdown-content.lang-list,
+    .lang-dropdown:focus-within .dropdown-content.lang-list {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .dropdown-content.lang-list a {
+      padding: 8px 18px;
+      font-size: 1rem;
+      color: #fff;
+      border-radius: 0;
+      text-align: left;
+      border: none;
+      display: block;
+      text-decoration: none;
+      background: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .dropdown-content.lang-list a:hover {
+      background: #181825;
+      color: #00f0ff;
     }
 
     h1 {
@@ -339,7 +342,7 @@
 
     @media (max-width: 700px) {
       nav { gap: 16px; }
-      .dropdown-content {
+      .dropdown-content, .lang-dropdown .dropdown-content.lang-list {
         grid-template-columns: 1fr;
         min-width: 160px;
         max-width: 95vw;
@@ -356,27 +359,27 @@
 </head>
 <body>
   <header>
-    <img src="images/logo.MangaEx-removebg-preview.png" alt="MangaEx" />
+    <img src="logo.MangaEx-removebg-preview.png" alt="MangaEx" />
     <!-- Topbar actions: язык и вход/регистрация -->
     <div class="topbar-actions">
       <div class="dropdown lang-dropdown">
-  <div class="dropdown-label" tabindex="0">
-    <span>Язык</span>
-    <div class="dropdown-icon">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <div class="dropdown-content lang-list">
-    <a href="#" data-lang="ru">Русский</a>
-    <a href="#" data-lang="uk">Українська</a>
-    <a href="#" data-lang="en">English</a>
-    <a href="#" data-lang="ja">日本語</a>
-    <a href="#" data-lang="zh">中文</a>
-    <a href="#" data-lang="ko">한국어</a>
-  </div>
-</div>
+        <div class="dropdown-label" tabindex="0">
+          <span>Язык</span>
+          <div class="dropdown-icon">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+        <div class="dropdown-content lang-list">
+          <a href="#" data-lang="ru">Русский</a>
+          <a href="#" data-lang="uk">Українська</a>
+          <a href="#" data-lang="en">English</a>
+          <a href="#" data-lang="ja">日本語</a>
+          <a href="#" data-lang="zh">中文</a>
+          <a href="#" data-lang="ko">한국어</a>
+        </div>
+      </div>
       <button class="auth-btn">Вход / Регистрация</button>
     </div>
   </header>
@@ -433,7 +436,7 @@
   <h1>Каталог манги</h1>
   <div class="manga-list">
     <div class="manga-card">
-      <img src="images/naruto.jpg" alt="Наруто">
+      <img src="naruto.jpg" alt="Наруто">
       <div class="info">
         <h3>Наруто</h3>
         <p>История ниндзя, мечтающего стать Хокаге.</p>
@@ -441,7 +444,7 @@
       </div>
     </div>
     <div class="manga-card">
-      <img src="images/attack_on_titan.jpg" alt="Атака Титанов">
+      <img src="attack_on_titan.jpg" alt="Атака Титанов">
       <div class="info">
         <h3>Атака Титанов</h3>
         <p>Человечество против титанов в мире без надежды.</p>
@@ -449,9 +452,9 @@
       </div>
     </div>
     <div class="manga-card">
-      <img src="images/Soineya_no_Uta.jpg" alt="Soineya no Uta">
+      <img src="Soineya_no_Uta.jpg" alt="Soineya no Uta">
       <div class="info">
-        <h3>images/Soineya_no_Uta.jpg</h3>
+        <h3>Soineya no Uta</h3>
         <p>Тихая история в магазине объятий.</p>
         <a href="#">Читать</a>
       </div>
