@@ -1,7 +1,8 @@
 // lang.js — Google Translate с сохранением выбора языка пользователя
 
-// 1. Функция смены языка через Google Translate
+// Функция смены языка через Google Translate
 function changeLanguage(lang) {
+  // Ищем выпадающий список Google Translate
   var select = document.querySelector('.goog-te-combo');
   if (select) {
     select.value = lang;
@@ -10,9 +11,9 @@ function changeLanguage(lang) {
   }
 }
 
-// 2. Скрываем стандартный виджет Google Translate и вешаем обработчики
+// Ждем загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
-  // Добавляем скрытый div для Google Translate, если его еще нет
+  // Добавляем скрытый div для Google Translate, если его нет
   var el = document.getElementById('google_translate_element');
   if (!el) {
     el = document.createElement('div');
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(el);
   }
 
-  // Обработчики клика по языковым ссылкам
+  // Вешаем обработчики на языковые ссылки
   var langLinks = document.querySelectorAll('.lang-list a[data-lang]');
   langLinks.forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -31,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Автоустановка сохранённого языка после загрузки страницы
+  // Автоустановка сохранённого языка после загрузки
   setTimeout(function() {
     var savedLang = localStorage.getItem('site_lang');
     if (savedLang) changeLanguage(savedLang);
-  }, 1500); // Ждём, пока Google Translate подгрузится
+  }, 1500); // Ждем подгрузки Google Translate
 });
