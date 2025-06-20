@@ -30,7 +30,14 @@ document.addEventListener('DOMContentLoaded', function () {
     profileLogin.value = userData.username || currentLogin;
     profileEmail.value = userData.email || "";
     profileAbout.value = userData.about || "";
-    avatarPreview.src = userData.avatar || "images/empty_profile.jpg";
+
+    // Если есть кастомный аватар, показываем его, иначе — empty_profile.png (без папки)
+    if (userData.avatar && userData.avatar.length > 10) {
+      avatarPreview.src = userData.avatar;
+    } else {
+      avatarPreview.src = "empty_profile.png";
+    }
+
     statFavorites.textContent = userData.stats?.favorites || 0;
     statComments.textContent = userData.stats?.comments || 0;
     statHistory.textContent = userData.stats?.history || 0;
