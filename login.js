@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const showRegisterTab = document.getElementById('showRegisterTab');
   const switchToRegister = document.getElementById('switchToRegister');
   const switchToLogin = document.getElementById('switchToLogin');
+  const profileLink = document.getElementById('profileLink');
+  const loginButton = document.getElementById('loginButton');
+
+  // Показывать "Профиль" если уже вошли
+  if (localStorage.getItem('current_user')) {
+    if (profileLink) profileLink.style.display = '';
+    if (loginButton) loginButton.style.display = 'none';
+  }
 
   // Открыть модалку
   authBtn.addEventListener('click', function (e) {
@@ -89,6 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     alert('Вход выполнен! Добро пожаловать, ' + userObj.username);
     modal.classList.remove('active');
-    // Здесь можно добавить сохранение "сессии" или обновление UI
+    localStorage.setItem('current_user', username);
+    if (profileLink) profileLink.style.display = '';
+    if (loginButton) loginButton.style.display = 'none';
+    // Можно добавить автоматический переход в профиль:
+    // window.location.href = "profile.html";
   });
 });
