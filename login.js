@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.style.display = 'none';
     modal.style.position = 'fixed';
     modal.style.top = '0';
-    modal.style.left = '0';
+    modal.style.left = '2';
     modal.style.width = '100vw';
     modal.style.height = '100vh';
     modal.style.background = 'rgba(0,0,0,0.6)';
