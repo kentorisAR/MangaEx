@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const profileAbout = document.getElementById('profileAbout');
   const saveProfileBtn = document.getElementById('saveProfileBtn');
   const logoutProfileBtn = document.getElementById('logoutProfileBtn');
+  const toMainBtn = document.getElementById('toMainBtn');
   const statFavorites = document.getElementById('stat-favorites');
   const statComments = document.getElementById('stat-comments');
   const statHistory = document.getElementById('stat-history');
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     profileEmail.value = userData.email || "";
     profileAbout.value = userData.about || "";
 
-    // Если есть кастомный аватар, показываем его, иначе — empty_profile.png (без папки)
+    // Если есть кастомный аватар, показываем его, иначе — empty_profile.png
     if (userData.avatar && userData.avatar.length > 10) {
       avatarPreview.src = userData.avatar;
     } else {
@@ -92,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   logoutProfileBtn.addEventListener('click', function () {
     localStorage.removeItem('current_user');
+    window.location.href = "index.html";
+  });
+
+  toMainBtn.addEventListener('click', function () {
     window.location.href = "index.html";
   });
 
