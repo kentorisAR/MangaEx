@@ -12,7 +12,7 @@ function changeLanguage(lang) {
 
 // 2. Скрываем стандартный виджет Google Translate и вешаем обработчики
 document.addEventListener('DOMContentLoaded', function() {
-  // Добавляем скрытый div для Google Translate
+  // Добавляем скрытый div для Google Translate, если его еще нет
   var el = document.getElementById('google_translate_element');
   if (!el) {
     el = document.createElement('div');
