@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация | MangaEx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      /* Неоновый фон, как на главной */
+      background: linear-gradient(120deg, #0f0f0f, #1e1e2f);
+      min-height: 100vh;
+      margin: 0;
+      color: #fff;
+    }
+    /* Контейнер сетки */
+    .neon-grid-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 28px);
+      grid-template-rows: repeat(8, 28px);
+      gap: 5px;
+      background: none;
+    }
+    .grid-cell {
+      width: 28px;
+      height: 28px;
+      border-radius: 5px;
+      background: rgba(0,240,255,0.07);
+      box-shadow: 0 0 10px 0 rgba(0,240,255,0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .grid-cell.active {
+      background: #00f0ff;
+      box-shadow: 0 0 18px 5px #00f0ff, 0 0 30px 10px #00f0ff77;
+    }
+
+    /* Центрируем форму */
+    .register-container {
+      position: relative;
+      margin: 0 auto;
+      z-index: 2;
+      max-width: 380px;
+      padding: 38px 32px 32px 32px;
+      background: rgba(30,30,46,0.99);
+      border-radius: 12px;
+      box-shadow: 0 0 32px #00f0ff44, 0 2px 12px #000a;
+      top: 90px;
+    }
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #00f0ff;
+      letter-spacing: 1.5px;
+    }
+    .register-container label {
+      display: block;
+      margin-bottom: 4px;
+      margin-top: 10px;
+      color: #b5eaff;
+      font-weight: 500;
+      letter-spacing: .5px;
+    }
+    .register-container input[type="text"],
+    .register-container input[type="password"] {
+      width: 100%;
+      padding: 11px 10px;
+      margin-bottom: 10px;
+      border-radius: 7px;
+      border: 1px solid #23233a;
+      background: #1a1a2f;
+      color: #fff;
+      font-size: 1em;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .register-container input:focus {
+      border: 1.5px solid #00f0ff;
+      box-shadow: 0 0 7px #00f0ff77;
+    }
+    .register-container button {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00f0ff, #1e1e2f 80%);
+      border: none;
+      color: #23233a;
+      font-size: 1.09em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      box-shadow: 0 0 18px #00f0ff77;
+      transition: background 0.23s, color 0.2s;
+      letter-spacing: 1px;
+    }
+    .register-container button:hover {
+      background: linear-gradient(90deg, #1e1e2f, #00f0ff 80%);
+      color: #fff;
+    }
+    #register-message {
+      text-align: center;
+      margin-top: 14px;
+      font-weight: bold;
+      color: #ff44cc;
+      min-height: 18px;
+    }
+    @media (max-width: 600px) {
+      .register-container {
+        padding: 18px 4vw 18px 4vw;
+        max-width: 98vw;
+      }
+      .grid {
+        grid-template-columns: repeat(12, 18px);
+        grid-template-rows: repeat(8, 18px);
+        gap: 3px;
+      }
+      .grid-cell, .grid-cell.active {
+        width: 18px; height: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Неоновая сетка -->
+  <div class="neon-grid-bg">
+    <div class="grid" id="neonGrid"></div>
+  </div>
+  <div class="register-container">
+    <h2>Регистрация</h2>
+    <form id="registerForm" autocomplete="off">
+      <label for="regLogin">Логин</label>
+      <input type="text" id="regLogin" maxlength="24" required autofocus>
+      <label for="regPassword">Пароль</label>
+      <input type="password" id="regPassword" maxlength="32" required>
+      <label for="regPassword2">Повторите пароль</label>
+      <input type="password" id="regPassword2" maxlength="32" required>
+      <button type="submit">Создать аккаунт</button>
+    </form>
+    <div id="register-message"></div>
+  </div>
+  <script src="register.js"></script>
+  <script>
+    // ---- Неоновая сетка с подсветкой под мышкой ----
+    const grid = document.getElementById('neonGrid');
+    const cols = 12, rows = 8;
+    let cells = [];
+    grid.innerHTML = '';
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        cell.dataset.x = x;
+        cell.dataset.y = y;
+        grid.appendChild(cell);
+        cells.push(cell);
+      }
+    }
+    // Подсвечиваем клетки вокруг мыши
+    function highlightCells(e) {
+      // Получаем координаты мыши относительно grid
+      const rect = grid.getBoundingClientRect();
+      const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      // Находим клетку под мышью
+      const cx = Math.floor(mx / (rect.width / cols));
+      const cy = Math.floor(my / (rect.height / rows));
+      // Снимаем подсветку
+      cells.forEach(cell => cell.classList.remove('active'));
+      // Подсвечиваем 3x3 вокруг мыши
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          let gx = cx + dx, gy = cy + dy;
+          if (gx >= 0 && gx < cols && gy >= 0 && gy < rows) {
+            cells[gy * cols + gx].classList.add('active');
+          }
+        }
+      }
+    }
+    grid.addEventListener('mousemove', highlightCells);
+    grid.addEventListener('mouseleave', () => cells.forEach(cell => cell.classList.remove('active')));
+  </script>
+</body>
+</html>
